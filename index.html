@@ -2,409 +2,317 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-    <title>My Music Room - Vintage Edition</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>playlistm</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet" />
     <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
         :root {
-            --brown-darkest: #1e1510;
-            --brown-dark:    #3d2b1f;
-            --brown-mid:     #5c4033;
-            --brown-warm:    #8b5e3c;
-            --brown-light:   #bc8f6f;
-            --paper:         #d4b996;
-            --paper-bright:  #e9dcc9;
-            --gold:          #b58928;
-            --ink:           #2c1e14;
+            --bg-color: #0f0e0d;
+            --card-bg: rgba(28, 25, 23, 0.85);
+            --accent: #c5a367;
+            --text-main: #e2d9d0;
+            --text-dim: #968d85;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(197, 163, 103, 0.2);
         }
 
-        html, body {
-            height: 100%;
-            font-family: 'Lora', serif;
-            background-color: var(--brown-darkest);
-            color: var(--paper-bright);
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+        body {
+            background: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Noto Sans KR', sans-serif;
             overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 50% -20%, #3d3428 0%, transparent 50%),
+                url("https://www.transparenttextures.com/patterns/stardust.png");
         }
 
-        /* ---------- VINTAGE TEXTURE ---------- */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background: 
-                url("https://www.transparenttextures.com/patterns/paper-fibers.png"),
-                radial-gradient(circle at 50% 50%, rgba(139, 94, 60, 0.15) 0%, transparent 100%);
-            opacity: 0.6;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Film Grain Effect */
-        body::after {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity: 0.05;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 480px;
+        .wrapper {
+            max-width: 500px;
             margin: 0 auto;
+            padding: 40px 20px;
             min-height: 100vh;
-            padding: 2rem 1.25rem 4rem;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 2rem;
+            gap: 30px;
         }
 
-        /* ---------- HEADER ---------- */
-        .header {
-            text-align: center;
-            border-bottom: 1px double var(--brown-light);
-            padding-bottom: 1.5rem;
-            width: 100%;
+        /* --- HEADER --- */
+        header { text-align: center; margin-bottom: 10px; }
+        header h1 { 
+            font-family: 'Cinzel', serif; 
+            font-size: 2.8rem; 
+            letter-spacing: 6px; 
+            color: var(--accent);
+            text-transform: lowercase;
+            font-weight: 400;
         }
-        .header-eyebrow {
-            font-size: 0.7rem;
-            letter-spacing: 0.4em;
-            text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 0.5rem;
-        }
-        .header-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--paper-bright);
-            line-height: 1;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-        .header-title em { font-style: italic; color: var(--gold); }
 
-        /* ---------- PLAYER CARD ---------- */
+        /* --- PLAYER CARD (Premium UI) --- */
         .player-card {
-            width: 100%;
-            background: #2a1b12;
-            border: 8px solid #3d2b1f;
-            border-radius: 10px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 100px rgba(0,0,0,0.5);
-            padding: 2rem 1.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 40px 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            position: relative;
+            text-align: center;
+        }
+
+        .vinyl-box {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+        }
+        .vinyl {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, #222 30%, #000 100%);
+            border: 4px solid #111;
+            box-shadow: 0 0 0 10px rgba(0,0,0,0.2);
+            animation: rotate 10s linear infinite;
+            animation-play-state: paused;
             position: relative;
         }
-
-        /* ---------- VINYL ---------- */
-        .vinyl-wrapper { position: relative; width: 220px; height: 220px; }
-        .vinyl {
-            width: 220px; height: 220px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 50% 50%, #d4b996 0%, #d4b996 8%, #111 9%, #111 100%);
-            box-shadow: 0 0 20px rgba(0,0,0,0.8);
-            animation: spin 8s linear infinite;
-            animation-play-state: paused;
+        .vinyl::after {
+            content: ''; position: absolute; inset: 0; border-radius: 50%;
+            background: repeating-radial-gradient(rgba(255,255,255,0.03) 0, transparent 2px);
         }
         .vinyl.playing { animation-play-state: running; }
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        .needle-wrapper {
-            position: absolute; top: -10px; right: -20px;
-            width: 80px; height: 100px;
-            transform-origin: 15px 15px; transform: rotate(-35deg);
-            transition: 1s ease-in-out;
-            z-index: 10;
-        }
-        .needle-wrapper.on-record { transform: rotate(5deg); }
-        .needle-head { width: 30px; height: 30px; background: #555; border-radius: 50%; border: 3px solid #777; }
-        .needle-stick { width: 4px; height: 80px; background: #888; margin-left: 13px; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-        /* ---------- INFO & STARS ---------- */
-        .track-info { text-align: center; }
-        .track-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--paper-bright); margin-bottom: 0.2rem; }
-        .track-artist { font-size: 0.85rem; color: var(--gold); font-style: italic; opacity: 0.8; }
+        .info-box h2 { font-family: 'Cinzel', serif; font-size: 1.5rem; margin-bottom: 5px; color: #fff; }
+        .info-box p { color: var(--accent); font-size: 0.9rem; letter-spacing: 2px; }
 
-        .star-rating { margin-top: 0.8rem; display: flex; gap: 4px; justify-content: center; }
-        .star { cursor: pointer; font-size: 1.2rem; color: #444; transition: 0.2s; }
-        .star.active { color: var(--gold); }
+        /* --- RATING --- */
+        .rating-box { margin: 15px 0; }
+        .stars { display: flex; justify-content: center; gap: 8px; font-size: 1.4rem; cursor: pointer; }
+        .star { color: #333; transition: 0.3s; }
+        .star.active { color: var(--accent); text-shadow: 0 0 10px rgba(197, 163, 103, 0.5); }
 
-        /* ---------- CONTROLS ---------- */
-        .progress-area { width: 100%; margin: 0.5rem 0; }
-        .progress-bar-wrap { width: 100%; height: 3px; background: rgba(255,255,255,0.1); cursor: pointer; position: relative; }
-        .progress-fill { height: 100%; width: 0%; background: var(--gold); }
-
-        .controls { display: flex; align-items: center; justify-content: center; gap: 2rem; width: 100%; }
-        .ctrl-btn { background: none; border: none; cursor: pointer; color: var(--paper); opacity: 0.8; }
+        /* --- CONTROLS --- */
+        .controls { display: flex; justify-content: center; align-items: center; gap: 30px; margin-top: 25px; }
+        .btn { background: none; border: none; color: var(--text-main); cursor: pointer; font-size: 1.1rem; transition: 0.3s; }
+        .btn:hover { color: var(--accent); }
         .play-btn { 
-            width: 50px; height: 50px; border-radius: 50%; background: var(--gold); 
-            display: flex; align-items: center; justify-content: center; color: #fff;
+            width: 60px; height: 60px; border-radius: 50%; 
+            background: var(--accent); color: #000; font-size: 1.5rem;
+            display: flex; align-items: center; justify-content: center;
         }
 
-        /* ---------- COMMENT SECTION ---------- */
-        .comment-section {
-            width: 100%;
-            background: var(--paper);
-            color: var(--ink);
-            padding: 1.5rem;
-            border-radius: 4px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
-            font-family: 'Lora', serif;
-        }
-        .comment-section h3 { font-size: 1rem; margin-bottom: 1rem; border-bottom: 1px solid var(--brown-mid); padding-bottom: 0.3rem; }
-        .comment-input-wrap { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.5rem; }
-        .comment-input {
-            width: 100%; padding: 0.8rem; background: rgba(255,255,255,0.4);
-            border: 1px solid var(--brown-mid); outline: none; font-family: inherit;
-        }
-        .comment-submit {
-            align-self: flex-end; padding: 0.4rem 1rem; background: var(--brown-dark);
-            color: var(--paper-bright); border: none; cursor: pointer; font-size: 0.8rem;
-        }
-        .comment-list { display: flex; flex-direction: column; gap: 0.8rem; max-height: 200px; overflow-y: auto; }
-        .comment-item { font-size: 0.85rem; line-height: 1.4; border-left: 2px solid var(--brown-mid); padding-left: 0.8rem; }
-        .comment-date { font-size: 0.7rem; opacity: 0.6; display: block; margin-top: 0.2rem; }
+        /* --- PROGRESS --- */
+        .progress-container { width: 100%; height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px; margin-top: 30px; cursor: pointer; }
+        .progress-bar { height: 100%; width: 0%; background: var(--accent); border-radius: 2px; position: relative; }
 
-        /* ---------- PLAYLIST ---------- */
-        .playlist-section { width: 100%; }
-        .track-item {
-            display: flex; align-items: center; gap: 1rem; padding: 0.8rem;
-            border-bottom: 1px solid rgba(188, 143, 111, 0.2); cursor: pointer;
+        /* --- GUESTBOOK (Sleek UI) --- */
+        .guestbook {
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 25px;
         }
-        .track-item.active { background: rgba(181, 137, 40, 0.15); border-left: 3px solid var(--gold); }
-        .track-num { font-size: 0.8rem; color: var(--gold); width: 20px; }
-        .t-title { font-size: 0.95rem; font-weight: 600; }
-        .t-artist { font-size: 0.75rem; opacity: 0.6; }
+        .guestbook h3 { font-size: 1rem; color: var(--accent); margin-bottom: 15px; font-weight: 400; letter-spacing: 1px; }
+        .input-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+        textarea {
+            background: rgba(0,0,0,0.2); border: 1px solid var(--border);
+            border-radius: 10px; padding: 15px; color: #fff; resize: none; font-family: inherit; outline: none;
+        }
+        .submit-btn {
+            background: var(--accent); border: none; padding: 10px; border-radius: 8px; 
+            font-weight: bold; cursor: pointer; transition: 0.3s;
+        }
+        .submit-btn:hover { opacity: 0.8; }
 
-        /* Scrollbar styling */
-        .comment-list::-webkit-scrollbar { width: 4px; }
-        .comment-list::-webkit-scrollbar-thumb { background: var(--brown-mid); }
+        .comment-list { display: flex; flex-direction: column; gap: 15px; max-height: 250px; overflow-y: auto; }
+        .comment-item { background: rgba(255,255,255,0.02); padding: 15px; border-radius: 12px; border-left: 3px solid var(--accent); }
+        .comment-text { font-size: 0.9rem; line-height: 1.6; }
+        .comment-date { font-size: 0.7rem; color: var(--text-dim); margin-top: 8px; display: block; }
+
+        /* --- LIST --- */
+        .playlist { display: flex; flex-direction: column; gap: 10px; }
+        .track {
+            padding: 15px 20px; border-radius: 15px; background: var(--glass);
+            display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.3s;
+        }
+        .track:hover { background: rgba(197, 163, 103, 0.1); }
+        .track.active { background: rgba(197, 163, 103, 0.15); border: 1px solid var(--border); }
+        .track-info-small h4 { font-size: 0.95rem; }
+        .track-info-small p { font-size: 0.75rem; color: var(--text-dim); }
+
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header class="header">
-        <p class="header-eyebrow">Aesthetic Music Archive</p>
-        <h1 class="header-title">playlis<em>틈</em></h1>
+<div class="wrapper">
+    <header>
+        <h1>playlistm</h1>
     </header>
 
     <div class="player-card">
-        <div class="vinyl-wrapper">
+        <div class="vinyl-box">
             <div class="vinyl" id="vinyl"></div>
-            <div class="needle-wrapper" id="needle">
-                <div class="needle-head"></div>
-                <div class="needle-stick"></div>
+        </div>
+        <div class="info-box">
+            <h2 id="title">Select a Track</h2>
+            <p id="artist">Artist</p>
+        </div>
+
+        <div class="rating-box">
+            <div class="stars" id="starContainer">
+                <span class="star" data-v="1">★</span>
+                <span class="star" data-v="2">★</span>
+                <span class="star" data-v="3">★</span>
+                <span class="star" data-v="4">★</span>
+                <span class="star" data-v="5">★</span>
             </div>
         </div>
 
-        <div class="track-info">
-            <div class="track-title" id="trackTitle">Loading...</div>
-            <div class="track-artist" id="trackArtist">Artist</div>
-            
-            <div class="star-rating" id="starRating">
-                <span class="star" data-value="1">★</span>
-                <span class="star" data-value="2">★</span>
-                <span class="star" data-value="3">★</span>
-                <span class="star" data-value="4">★</span>
-                <span class="star" data-value="5">★</span>
-            </div>
-        </div>
-
-        <div class="progress-area">
-            <div class="progress-bar-wrap" id="progressWrap">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
+        <div class="progress-container" id="progressWrap">
+            <div class="progress-bar" id="progressFill"></div>
         </div>
 
         <div class="controls">
-            <button class="ctrl-btn" id="prevBtn">PREV</button>
-            <button class="play-btn" id="playBtn">▶</button>
-            <button class="ctrl-btn" id="nextBtn">NEXT</button>
+            <button class="btn" id="prev">PREV</button>
+            <button class="btn play-btn" id="play">▶</button>
+            <button class="btn" id="next">NEXT</button>
         </div>
     </div>
 
-    <!-- COMMENT SECTION -->
-    <div class="comment-section">
-        <h3 id="commentHeader">방명록</h3>
-        <div class="comment-input-wrap">
-            <textarea class="comment-input" id="commentInput" placeholder="이 곡에 남기고 싶은 마음을 적어주세요..."></textarea>
-            <button class="comment-submit" id="commentSubmit">남기기</button>
+    <div class="guestbook">
+        <h3>GUESTBOOK</h3>
+        <div class="input-group">
+            <textarea id="commentInput" rows="3" placeholder="Write your thoughts..."></textarea>
+            <button class="submit-btn" id="submitComment">POST</button>
         </div>
-        <div class="comment-list" id="commentList">
-            <!-- Comments load here -->
-        </div>
+        <div class="comment-list" id="commentList"></div>
     </div>
 
-    <div class="playlist-section">
-        <div class="track-list" id="trackList"></div>
-    </div>
-
-    <p style="font-size: 0.7rem; opacity: 0.3; font-style: italic;">Captured in a moment of silence.</p>
+    <div class="playlist" id="playlist"></div>
 </div>
 
-<audio id="audioEl"></audio>
+<audio id="mainAudio"></audio>
 
 <script>
     const tracks = [
-        { title: "Forgotten Light", artist: "000", src: "Forgotten Light.mp3", duration: "2:40" },
-        { title: "Radio Distant Hiss", artist: "000", src: "Radio Distant Hiss.mp3", duration: "3:30" },
-        { title: "Light Silence", artist: "000", src: "Light Silence.mp3", duration: "2:50" },
-        { title: "Turned-Up Cup", artist: "000", src: "Turned-Up Cup.mp3", duration: "3:24" },
-        { title: "Hallway Light", artist: "000", src: "Hallway Light.mp3", duration: "2:39" },
-        { title: "Glass Without Purpose", artist: "000", src: "Glass Without Purpose.mp3", duration: "4:27" }
+        { title: "Forgotten Light", artist: "000", src: "Forgotten Light.mp3" },
+        { title: "Radio Distant Hiss", artist: "000", src: "Radio Distant Hiss.mp3" },
+        { title: "Light Silence", artist: "000", src: "Light Silence.mp3" },
+        { title: "Turned-Up Cup", artist: "000", src: "Turned-Up Cup.mp3" },
+        { title: "Hallway Light", artist: "000", src: "Hallway Light.mp3" },
+        { title: "Glass Without Purpose", artist: "000", src: "Glass Without Purpose.mp3" }
     ];
 
-    const audio = document.getElementById('audioEl');
-    const vinyl = document.getElementById('vinyl');
-    const needle = document.getElementById('needle');
-    const playBtn = document.getElementById('playBtn');
-    const trackTitle = document.getElementById('trackTitle');
-    const trackArtist = document.getElementById('trackArtist');
-    const trackListEl = document.getElementById('trackList');
-    const progressFill = document.getElementById('progressFill');
-    const progressWrap = document.getElementById('progressWrap');
-    
-    // Comment & Star elements
-    const commentInput = document.getElementById('commentInput');
-    const commentSubmit = document.getElementById('commentSubmit');
-    const commentList = document.getElementById('commentList');
-    const stars = document.querySelectorAll('.star');
-
-    let currentIndex = 0;
+    let currentIdx = 0;
     let isPlaying = false;
+    const audio = document.getElementById('mainAudio');
 
-    // --- Data Persistence ---
-    function getStoredData(key) { return JSON.parse(localStorage.getItem('playlisTeum_' + key)) || {}; }
-    function setStoredData(key, data) { localStorage.setItem('playlisTeum_' + key, JSON.stringify(data)); }
-
-    function loadTrack(index, autoPlay = false) {
-        currentIndex = index;
-        const t = tracks[index];
-        trackTitle.textContent = t.title;
-        trackArtist.textContent = t.artist;
+    // --- 핵심: 데이터 영구 보존 로직 (Key에 곡 제목 포함) ---
+    function loadTrack(idx, playImmediately = false) {
+        currentIdx = idx;
+        const t = tracks[idx];
+        document.getElementById('title').innerText = t.title;
+        document.getElementById('artist').innerText = t.artist;
         audio.src = t.src;
         
-        // Update Playlist UI
-        updatePlaylistUI();
-        // Load Comments & Stars
-        renderComments();
+        renderPlaylist();
         renderStars();
+        renderComments();
 
-        if (autoPlay) {
-            audio.play().then(() => setPlaying(true)).catch(() => {});
-        } else {
-            setPlaying(false);
+        if (playImmediately) {
+            audio.play();
+            isPlaying = true;
+            updatePlayBtn();
         }
     }
 
-    function updatePlaylistUI() {
-        trackListEl.innerHTML = '';
-        tracks.forEach((t, i) => {
-            const item = document.createElement('div');
-            item.className = 'track-item' + (i === currentIndex ? ' active' : '');
-            item.innerHTML = `<span class="track-num">${i + 1}</span><div><div class="t-title">${t.title}</div><div class="t-artist">${t.artist}</div></div>`;
-            item.onclick = () => loadTrack(i, true);
-            trackListEl.appendChild(item);
+    function renderPlaylist() {
+        const container = document.getElementById('playlist');
+        container.innerHTML = tracks.map((t, i) => `
+            <div class="track ${i === currentIdx ? 'active' : ''}" onclick="loadTrack(${i}, true)">
+                <div class="track-info-small">
+                    <h4>${t.title}</h4>
+                    <p>${t.artist}</p>
+                </div>
+                <span style="font-size:0.7rem; color:var(--accent)">PLAY</span>
+            </div>
+        `).join('');
+    }
+
+    // --- RATING SYSTEM (Persistence) ---
+    function renderStars() {
+        const ratings = JSON.parse(localStorage.getItem('plm_ratings') || '{}');
+        const score = ratings[tracks[currentIdx].title] || 0;
+        document.querySelectorAll('.star').forEach(s => {
+            s.classList.toggle('active', s.dataset.v <= score);
         });
     }
 
-    function setPlaying(state) {
-        isPlaying = state;
-        if (state) {
-            vinyl.classList.add('playing');
-            needle.classList.add('on-record');
-            playBtn.textContent = '||';
-        } else {
-            vinyl.classList.remove('playing');
-            needle.classList.remove('on-record');
-            playBtn.textContent = '▶';
-        }
-    }
-
-    // --- Star Rating Logic ---
-    stars.forEach(star => {
-        star.onclick = () => {
-            const val = star.getAttribute('data-value');
-            const ratings = getStoredData('ratings');
-            ratings[tracks[currentIndex].title] = val;
-            setStoredData('ratings', ratings);
+    document.querySelectorAll('.star').forEach(s => {
+        s.onclick = () => {
+            const ratings = JSON.parse(localStorage.getItem('plm_ratings') || '{}');
+            ratings[tracks[currentIdx].title] = s.dataset.v;
+            localStorage.setItem('plm_ratings', JSON.stringify(ratings));
             renderStars();
         };
     });
 
-    function renderStars() {
-        const ratings = getStoredData('ratings');
-        const currentVal = ratings[tracks[currentIndex].title] || 0;
-        stars.forEach(s => {
-            s.classList.toggle('active', s.getAttribute('data-value') <= currentVal);
-        });
-    }
-
-    // --- Comment Logic ---
-    commentSubmit.onclick = () => {
-        const text = commentInput.value.trim();
-        if (!text) return;
-        const comments = getStoredData('comments');
-        const trackKey = tracks[currentIndex].title;
-        if (!comments[trackKey]) comments[trackKey] = [];
+    // --- GUESTBOOK SYSTEM (Persistence) ---
+    document.getElementById('submitComment').onclick = () => {
+        const val = document.getElementById('commentInput').value.trim();
+        if(!val) return;
         
-        comments[trackKey].unshift({
-            text: text,
-            date: new Date().toLocaleString('ko-KR', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' })
-        });
+        const comments = JSON.parse(localStorage.getItem('plm_comments') || '{}');
+        const tKey = tracks[currentIdx].title;
+        if(!comments[tKey]) comments[tKey] = [];
         
-        setStoredData('comments', comments);
-        commentInput.value = '';
+        comments[tKey].unshift({ text: val, date: new Date().toLocaleDateString() });
+        localStorage.setItem('plm_comments', JSON.stringify(comments));
+        
+        document.getElementById('commentInput').value = '';
         renderComments();
     };
 
     function renderComments() {
-        const comments = getStoredData('comments');
-        const trackKey = tracks[currentIndex].title;
-        const list = comments[trackKey] || [];
-        commentList.innerHTML = list.length ? '' : '<p style="opacity:0.4; font-size:0.8rem;">아직 남겨진 이야기가 없습니다.</p>';
-        list.forEach(c => {
-            const div = document.createElement('div');
-            div.className = 'comment-item';
-            div.innerHTML = `${c.text}<span class="comment-date">${c.date}</span>`;
-            commentList.appendChild(div);
-        });
+        const comments = JSON.parse(localStorage.getItem('plm_comments') || '{}');
+        const list = comments[tracks[currentIdx].title] || [];
+        document.getElementById('commentList').innerHTML = list.map(c => `
+            <div class="comment-item">
+                <p class="comment-text">${c.text}</p>
+                <span class="comment-date">${c.date}</span>
+            </div>
+        `).join('') || '<p style="text-align:center; opacity:0.3; font-size:0.8rem;">No comments yet.</p>';
     }
 
-    // --- Audio Controls ---
-    playBtn.onclick = () => {
-        if (isPlaying) { audio.pause(); setPlaying(false); }
-        else { audio.play().then(() => setPlaying(true)); }
+    // --- CONTROLS ---
+    function updatePlayBtn() {
+        document.getElementById('play').innerText = isPlaying ? '||' : '▶';
+        document.getElementById('vinyl').classList.toggle('playing', isPlaying);
+    }
+
+    document.getElementById('play').onclick = () => {
+        if(isPlaying) audio.pause(); else audio.play();
+        isPlaying = !isPlaying;
+        updatePlayBtn();
     };
 
-    document.getElementById('nextBtn').onclick = () => loadTrack((currentIndex + 1) % tracks.length, isPlaying);
-    document.getElementById('prevBtn').onclick = () => loadTrack((currentIndex - 1 + tracks.length) % tracks.length, isPlaying);
+    document.getElementById('next').onclick = () => loadTrack((currentIdx + 1) % tracks.length, isPlaying);
+    document.getElementById('prev').onclick = () => loadTrack((currentIdx - 1 + tracks.length) % tracks.length, isPlaying);
 
     audio.ontimeupdate = () => {
         const pct = (audio.currentTime / audio.duration) * 100;
-        progressFill.style.width = pct + '%';
+        document.getElementById('progressFill').style.width = pct + '%';
     };
 
-    progressWrap.onclick = (e) => {
-        const rect = progressWrap.getBoundingClientRect();
-        const pct = (e.clientX - rect.left) / rect.width;
-        audio.currentTime = pct * audio.duration;
+    document.getElementById('progressWrap').onclick = (e) => {
+        const rect = e.target.getBoundingClientRect();
+        audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
     };
 
-    audio.onended = () => document.getElementById('nextBtn').click();
-
-    // Init
-    loadTrack(0, false);
+    // INIT
+    loadTrack(0);
 </script>
-
 </body>
 </html>
